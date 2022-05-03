@@ -48,7 +48,32 @@
       </div>
 
       <div class="content">
-        <p>Welcome to my website!<br><h4>Who am I?</h4>My name is Jesper Magnusson (<span style="font-weight: bold;" id="age"></span>) and I am a regular nerd who likes to code <a href="/sw" title="Take a look at my software." aria-disabled="true">software</a> in my spare time, mostly for Linux as I use it in my everyday computers.</p>
+        <p>Welcome to my website!<br><h4>Who am I?</h4>I am a nerd from Sweden who likes to code my own <a href="/sw">software</a> and mostly for Linux as I use it on all my devices... <a href="#" data-bs-toggle="modal" data-bs-target="#aboutModal">Read more &raquo;</a></p>
+
+
+        <!-- About me modal -->
+        <div class="modal fade" id="aboutModal" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-scrollable" style="max-width: 500px;">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="aboutModalLabel">Who am I?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                I am a nerd from Sweden who likes to code my own <a href="/sw">software</a> and mostly for Linux as I use it on all my devices.
+                <br><br>
+                <span id="age"></span> years old and self-taught, builds software for automation of my own workflow, server management, installation software, websites & various networking tools.
+                <br><br>
+                If you like what you see, you can follow me on social media or maybe donate a dollar, donations can be found further down the page.
+              </div>
+              <div class="modal-footer">
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /About me modal -->
+
 
         <a href="#" class="btn btn-sm btn-primary disabled" aria-disabled="true"><span class="iconify" data-icon="ion:beer-outline" data-width="24"></span> Buy me a beer?</a>
       </div>
