@@ -7,3 +7,6 @@ body {
   font-size: 55px;
 
 }
+.content {
+  max-width: 500px;
+}
