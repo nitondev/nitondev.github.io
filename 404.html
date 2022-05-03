@@ -33,13 +33,20 @@
         </div>
       </div>
       <script>
-         setTimeout(function(){
-            window.location.href = 'https://niton.me/';
-         }, 5000);
+        var timeleft = 4;
+        var redirectTimer = setInterval(function(){
+          if(timeleft <= 0){
+            clearInterval(redirectTimer);
+            window.location.href = "https://niton.me/";
+          } else {
+            document.getElementById("countdown").innerHTML = timeleft;
+          }
+          timeleft -= 1;
+        }, 1000);
       </script>
       <div class="content">
         <br>
-        <p>the requested URL returned a 404 error, the file or page you are looking for does not exist.<br>you'll be redirected after 5 sec.</p>
+        <p>The requested URL returned a 404 error, the file or page you are looking for does not exist.<br><br><small>You'll be redirected after <span id="countdown">5</span> sec.<small></p>
       </div>
     </div>
 
