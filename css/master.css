@@ -10,3 +10,7 @@ body {
 .content {
   max-width: 500px;
 }
+td > a {
+  text-decoration: none;
+  width: 100%;
+}
