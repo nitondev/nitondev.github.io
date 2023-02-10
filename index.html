@@ -1,27 +1,23 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>niton, self-taught nerd</title>
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@nitondev">
-    <meta name="twitter:title" content="niton, self-taught nerd">
-    <meta name="twitter:description" content="A 28 y/o self-taught nerd">
-    <meta name="twitter:image" content="https://niton.dev/img/social.jpg">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="niton, self-taught nerd">
-    <meta property="og:description" content="A 28 y/o self-taught nerd">
-    <meta property="og:image" content="https://niton.dev/img/social.jpg>
-    <meta property="og:url" content="https://niton.dev">
-    <link rel="icon" type="image/x-icon" href="https://niton.dev/img/favicon.ico">
-  </head>
-  <body style="margin:0;background-color:black">
-    <h1 style="color:white;text-align:center;vertical-align:middle;height:100vh">niton.dev</h1>
-    <p style="color:white;text-align:center;font-size:18px">A 28 y/o <span id="age"></span> self-taught nerd</p>
-    <script>
-      const birthdate=new Date(1994,10,2),age=Math.floor((new Date()-birthdate)/31536000000);
-      document.getElementById("age").innerHTML=age;
-    </script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta property="og:title" content="niton,self-taught nerd">
+  <meta property="og:image" content="https://niton.dev/img/social.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@nitondev">
+  <link rel="icon" href="https://niton.dev/img/favicon.ico">
+  <title>niton,self-taught nerd</title>
+  <style>
+    body{background:black;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+    h1{color:white;font-size:45px;font-weight:bold;}
+    span#age{color:white;}
+  </style>
+</head>
+<body>
+  <h1>niton.dev</h1>
+  <p>a <span id="age"></span> y/o self-taught nerd</p>
+  <script>const b=new Date(1994,10,2),a=new Date,c=a.getFullYear()-b.getFullYear();document.getElementById("age").innerHTML=c;</script>
+</body>
 </html>
