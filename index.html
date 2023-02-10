@@ -1,36 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>niton, self-taught nerd</title>
     <style>
-      body {
-        background-color: black;
-        color: white;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        overflow: hidden;
-      }
-      h1 {
-        font-size: 45px;
-        font-weight: bold;
-        margin: 0;
-      }
+      body{background-color:black;color:white;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;overflow:hidden}
+      h1{font-size:45px;font-weight:bold;margin:0}
     </style>
   </head>
   <body>
     <h1>niton.dev</h1>
     <p>a <span id="age"></span> y/o self-taught nerd</p>
-
     <script>
-      const birthdate = new Date(1994, 10, 2);
-      const ageSpan = document.querySelector("#age");
-      const currentDate = new Date();
-      const ageInMilliseconds = currentDate - birthdate;
-      const ageInYears = ageInMilliseconds / (1000 * 60 * 60 * 24 * 365.25);
-      ageSpan.innerText = Math.floor(ageInYears);
+      const b=new Date(1994,10,2),a=new Date,c=a-b,d=c/(1e3*60*60*24*365.25),e=Math.floor(d);
+      document.querySelector("#age").innerText=e;
     </script>
   </body>
 </html>
