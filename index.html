@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>niton, self-taught nerd</title>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@nitondev">
+    <meta name="twitter:title" content="niton, self-taught nerd">
+    <meta name="twitter:description" content="A 28 y/o self-taught nerd">
+    <meta name="twitter:image" content="https://niton.dev/img/social.png">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="niton, self-taught nerd">
+    <meta property="og:description" content="A 28 y/o self-taught nerd">
+    <meta property="og:image" content="https://niton.dev/img/social.png">
+    <meta property="og:url" content="https://niton.dev">
     <link rel="icon" type="image/x-icon" href="https://niton.dev/img/favicon.ico">
-    <style>
-      body{background-color:black;color:white;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;overflow:hidden}
-      h1{font-size:45px;font-weight:bold;margin:0}
-    </style>
   </head>
-  <body>
-    <h1>niton.dev</h1>
-    <p>a <span id="age"></span> y/o self-taught nerd</p>
+  <body style="margin:0;background-color:black">
+    <h1 style="color:white;text-align:center;vertical-align:middle;height:100vh">niton.dev</h1>
+    <p style="color:white;text-align:center;font-size:18px">A 28 y/o <span id="age"></span> self-taught nerd</p>
     <script>
-      const b = new Date(1994, 10, 2), a = new Date(), c = a - b, d = c / (1000 * 60 * 60 * 24 * 365.25), e = Math.floor(d);
-      document.querySelector("#age").innerText = e;
+      const birthdate=new Date(1994,10,2),age=Math.floor((new Date()-birthdate)/31536000000);
+      document.getElementById("age").innerHTML=age;
     </script>
   </body>
 </html>
