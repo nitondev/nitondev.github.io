@@ -1,0 +1,22 @@
+[
+   {
+      "id":1,
+      "name":"Jan Pettersson",
+      "insta":"pettersson"
+   },
+   {
+      "id":2,
+      "name":"Jeannette Pettersson",
+      "insta":"jettsson"
+   },
+   {
+      "id":3,
+      "name":"Olle Gunnarsson",
+      "insta":"ogson"
+   },
+   {
+      "id":4,
+      "name":"Markus Rosenberg",
+      "insta":"mrberg"
+   }
+]
