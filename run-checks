@@ -1,0 +1,85 @@
+#!/bin/bash
+
+# List of binaries to check
+binaries=(
+  gcc
+  clang
+  make
+  bc
+  flex
+  bison
+  xz
+  curl
+  jq
+  cpio
+  kmod
+  git
+  patch
+  perl
+  python3
+  ccache
+  qemu
+  gdb
+)
+
+# List of development libraries to check
+libraries=(
+  libssl-dev
+  libelf-dev
+  libncurses5-dev
+)
+
+# Function to check if a binary is installed
+check_binary() {
+  local binary=$1
+  local path=$(which $binary 2>/dev/null)
+  if [ -z "$path" ]; then
+    printf "%-${max_length}s : \e[31m%s\e[0m\n" "$binary" "not installed"
+  else
+    printf "%-${max_length}s : %s\n" "$binary" "$path"
+  fi
+}
+
+# Function to check if a library is installed
+check_library() {
+  local library=$1
+  dpkg -s $library &>/dev/null
+  if [ $? -ne 0 ]; then
+    printf "%-${max_length_lib}s : \e[31m%s\e[0m\n" "$library" "not installed"
+  else
+    printf "%-${max_length_lib}s : %s\n" "$library" "installed"
+  fi
+}
+
+# Determine the maximum length of the binary names for formatting
+max_length=0
+for binary in "${binaries[@]}"; do
+  if [ ${#binary} -gt $max_length ]; then
+    max_length=${#binary}
+  fi
+done
+
+# Determine the maximum length of the library names for formatting
+max_length_lib=0
+for library in "${libraries[@]}"; do
+  if [ ${#library} -gt $max_length_lib ]; then
+    max_length_lib=${#library}
+  fi
+done
+
+# Check each binary
+echo -e "\nChecking binaries:\n"
+printf "%-${max_length}s : %s\n" "Binary" "Path"
+printf "%-${max_length}s : %s\n" "------" "----"
+for binary in "${binaries[@]}"; do
+  check_binary $binary
+done
+
+echo -e "\nChecking development libraries:\n"
+printf "%-${max_length_lib}s : %s\n" "Library" "Status"
+printf "%-${max_length_lib}s : %s\n" "-------" "------"
+for library in "${libraries[@]}"; do
+  check_library $library
+done
+
+echo -e "\nMake sure everything is installed before proceeding."
