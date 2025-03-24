@@ -6,11 +6,40 @@ convert_to_miB() {
     echo $(( $(echo "$1" | sed 's/[A-Za-z]*//g') * 1024 ))
 }
 
+update_mirrors() {
+    echo "Fetching your country from ip-api.com..."
+    country=$(curl -s http://ip-api.com/json | grep -oP '"country":"\K[^"]+')
+
+    if [ -z "$country" ]; then
+        echo "Failed to detect country. Falling back to default mirrors."
+        return 1
+    fi
+
+    echo "Detected country: $country"
+
+    echo "Installing reflector if not installed..."
+    if ! command -v reflector &> /dev/null; then
+        pacman -Sy --noconfirm reflector
+    fi
+
+    echo "Backing up current mirrorlist..."
+    cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup.$(date +%F-%T)
+
+    echo "Updating mirrorlist using best mirrors in $country..."
+    reflector --country "$country" --latest 20 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+
+    echo "Updating package database..."
+    pacman -Syyu --noconfirm
+
+    echo "Mirror update and system upgrade completed!"
+}
+
 BOOT_SIZE="1GiB"
 SWAP_SIZE="2GiB"
 ROOT_SIZE="100%"
 
 TIMEZONE=$(curl -s http://ip-api.com/json | sed -n 's/.*"timezone":"\([^"]*\)".*/\1/p')
+
 
 # Convert sizes to MiB
 BOOT_SIZE_MI=$(( $(convert_to_miB "$BOOT_SIZE") ))
