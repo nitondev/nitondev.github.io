@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+echo -e "\n-------- Optimizing Mirrors --------"
+ISO=$(curl -s -4 ifconfig.co/country-iso)
+pacman -Sy --noconfirm archlinux-keyring
