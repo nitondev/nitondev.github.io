@@ -78,15 +78,36 @@ pacstrap /mnt base linux linux-firmware nano sudo networkmanager grub efibootmgr
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
-arch-chroot /mnt bash -c "
+arch-chroot /mnt /bin/bash <<EOF
 
-    echo -e \"\n-------- Timezone Setup --------\"
+    echo -e "\n-------- Timezone Setup --------"
 
     # Set the timezone.
-    echo -e \"Detected timezone: $TIMEZONE \n\"
+    echo -e "Detected timezone: $TIMEZONE \n"
     ln -sf /usr/share/zoneinfo/"$TIMEZONE" /etc/localtime
+    
+    date
 
     # Sync harware clock.
     hwclock --systohc
 
-"
+    echo -e "\n-------- Localization Setup --------"
+
+    sed -i '/^#.*en_US.UTF-8 UTF-8/s/^#//' /etc/locale.gen
+    locale-gen
+
+    echo "LANG=en_US.UTF-8" > /etc/locale.conf
+
+    echo "KEYMAP=sv-latin1" > /etc/vconsole.conf
+
+    echo -e "\n-------- User Account Setup --------"
+
+    echo -e \"Enter a username (default: user):\"
+    read -r -p \"> \" USERNAME </dev/tty
+    USERNAME=${USERNAME:-user}  # If empty, set to 'user'
+
+    echo -e \"Enter a hostname (default: archlinux):\"
+    read -r -p \"> \" HOSTNAME </dev/tty
+    HOSTNAME=${HOSTNAME:-archlinux}  # If empty, set to 'archlinux'
+
+EOF
