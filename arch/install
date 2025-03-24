@@ -73,7 +73,7 @@ swapon "$DISK"2
 
 echo -e "\n-------- Base Package Install --------"
 sleep 2
-pacstrap /mnt base linux linux-firmware nano networkmanager grub efibootmgr
+pacstrap /mnt base linux linux-firmware nano sudo networkmanager grub efibootmgr
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
