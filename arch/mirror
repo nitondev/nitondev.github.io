@@ -2,7 +2,7 @@
 
 set -e
 
-ISO=$(curl -4 --max-time 10 ifconfig.co/country-iso || echo "US")
+ISO=$(curl -s -4 --max-time 10 ifconfig.co/country-iso || echo "US")
 timedatectl set-ntp true
 
 echo -e "\n-------- Updating Keyring --------\n"
