@@ -79,10 +79,13 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 arch-chroot /mnt bash -c "
 
-    echo -e "\n-------- Timezone Setup --------"
+    echo -e \"\n-------- Timezone Setup --------\"
 
-    echo -e "Detected timezone: $TIMEZONE \n"
+    # Set the timezone.
+    echo -e \"Detected timezone: $TIMEZONE \n\"
     ln -sf /usr/share/zoneinfo/"$TIMEZONE" /etc/localtime
+
+    # Sync harware clock.
     hwclock --systohc
 
 "
