@@ -2,32 +2,21 @@
 
 set -e
 
-echo -e "\n-------- Optimizing Mirrors --------"
-ISO=$(curl -s -4 ifconfig.co/country-iso)
+ISO=$(curl -4 --max-time 10 ifconfig.co/country-iso || echo "US")
+timedatectl set-ntp true
+
+echo -e "\n-------- Updating Keyring --------\n"
 pacman -Sy --noconfirm archlinux-keyring
 
+# Make sure reflector is/gets installed.
+echo -e "\n==> Installing Reflector"
+pacman -Sy --noconfirm --needed reflector
 
-if [ -z "$ISO" ]; then
-    echo "Failed to detect country ISO, exiting..."
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+echo -e "\n==> Backed up mirror list."
+
+echo -e "\n==> Fetching the fastest 6 mirrors for country: $ISO"
+if ! reflector --country "$ISO" --age 6 --fastest 6 --sort rate --save /etc/pacman.d/mirrorlist; then
+    echo "Error: Failed to fetch mirrors."
     exit 1
 fi
-
-echo "Detected Country: $ISO"
-
-sed -i 's/^#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
-
-if ! command -v reflector &> /dev/null; then
-    echo -e "\n==> Installing Reflector"
-    pacman -Sy --noconfirm --needed reflector
-fi
-
-# Backup the mirrorlist
-mirrorlist_backup="/etc/pacman.d/mirrorlist.backup"
-if [ ! -f "$mirrorlist_backup" ]; then
-    echo "Mirror list backed up at: $mirrorlist_backup"
-    cp /etc/pacman.d/mirrorlist "$mirrorlist_backup"
-else
-    echo "Backup already exists: $mirrorlist_backup"
-fi
-
-reflector --country "$ISO" --protocol https --latest 6 --sort rate --save /etc/pacman.d/mirrorlist
