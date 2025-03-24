@@ -22,7 +22,7 @@ if ! command -v reflector &> /dev/null; then
 fi
 
 # Backup the mirrorlist
-mirrorlist_backup="/etc/pacman.d/mirrorlist.bakup"
+mirrorlist_backup="/etc/pacman.d/mirrorlist.backup"
 if [ ! -f "$mirrorlist_backup" ]; then
     echo "Mirror list backed up at: $mirrorlist_backup"
     cp /etc/pacman.d/mirrorlist "$mirrorlist_backup"
