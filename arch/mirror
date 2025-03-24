@@ -12,8 +12,12 @@ pacman -Sy --noconfirm archlinux-keyring
 echo -e "\n==> Installing Reflector"
 pacman -Sy --noconfirm --needed reflector
 
-cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-echo -e "\n==> Backed up mirror list."
+if [[ -f /etc/pacman.d/mirrorlist.backup ]]; then
+    echo -e "\n==> Mirror list already backed up."
+else
+    cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+    echo -e "\n==> Backed up mirror list."
+fi
 
 echo -e "\n==> Fetching the fastest 6 mirrors for country: $ISO"
 if ! reflector --country "$ISO" --age 6 --fastest 6 --sort rate --save /etc/pacman.d/mirrorlist; then
