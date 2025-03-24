@@ -1,5 +1,33 @@
 #!/usr/bin/env bash
 
+set -e
+
 echo -e "\n-------- Optimizing Mirrors --------"
 ISO=$(curl -s -4 ifconfig.co/country-iso)
 pacman -Sy --noconfirm archlinux-keyring
+
+
+if [ -z "$ISO" ]; then
+    echo "Failed to detect country ISO, exiting..."
+    exit 1
+fi
+
+echo "Detected Country: $ISO"
+
+sed -i 's/^#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
+
+if ! command -v reflector &> /dev/null; then
+    echo -e "\n==> Installing Reflector"
+    pacman -Sy --noconfirm --needed reflector
+fi
+
+# Backup the mirrorlist
+mirrorlist_backup="/etc/pacman.d/mirrorlist.bakup"
+if [ ! -f "$mirrorlist_backup" ]; then
+    echo "Mirror list backed up at: $mirrorlist_backup"
+    cp /etc/pacman.d/mirrorlist "$mirrorlist_backup"
+else
+    echo "Backup already exists: $mirrorlist_backup"
+fi
+
+reflector --country "$ISO" --protocol https --latest 6 --sort rate --save /etc/pacman.d/mirrorlist
