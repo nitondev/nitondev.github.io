@@ -10,7 +10,7 @@ pacman -Sy --noconfirm archlinux-keyring
 
 # Make sure reflector is/gets installed.
 echo -e "\n==> Installing Reflector"
-pacman -Sy --noconfirm --needed reflector
+pacman -Sy --noconfirm --needed reflector rsync
 
 if [[ -f /etc/pacman.d/mirrorlist.backup ]]; then
     echo -e "\n==> Mirror list already backed up."
