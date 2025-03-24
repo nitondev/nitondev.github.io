@@ -44,6 +44,8 @@ if [[ ! "$CONFIRM" =~ ^[Yy]$ ]]; then
     exit 0
 fi
 
+umount -A --recursive /mnt
+
 echo -e "\nStarting partitioning of $DISK..."
 
 echo "[Partition]: Creating GPT table..."
