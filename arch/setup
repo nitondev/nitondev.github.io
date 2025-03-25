@@ -21,7 +21,7 @@ root_check() {
     fi
 }
 docker_check() {
-    if grep -q docker /proc/1/cgroup 2>/dev/null || [[ -f /run/.dockerenv ]]; then
+    if grep -q docker /proc/1/cgroup 2>/dev/null || [[ -f /.dockerenv ]]; then
         echo -e "${RED}\nError:${NC} Docker is not supported."
         exit 1
     fi
