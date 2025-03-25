@@ -20,7 +20,7 @@ else
     echo -e "\n==> Backed up mirror list."
 fi
 
-echo -e "\n-------- Fetching $ISO Mirrors --------\n"
+echo -e "\n-------- Fetching Mirrors [$ISO] --------\n"
 if ! reflector --country "$ISO" --age 6 --fastest 6 --sort rate --save /etc/pacman.d/mirrorlist; then
     echo "Error: Failed to fetch mirrors."
     exit 1
