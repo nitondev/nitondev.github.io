@@ -6,7 +6,7 @@ NC='\033[0m'
 
 clear
 
-curl -s https://niton.dev/arch/arch.
+curl -s https://niton.dev/arch/arch.txt
 
 arch_check() {
     if ! grep -q "Arch Linux" /etc/os-release; then
