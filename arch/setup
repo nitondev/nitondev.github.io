@@ -5,16 +5,28 @@ clear
 
 curl -s https://niton.dev/arch/arch.txt
 
-# Run checks, before proceed.
-if ! grep -q "Arch Linux" /etc/os-release; then
-    echo -e "\n\033[0;31mError:\033[0m This script must be run on Arch Linux!"
-    exit 1
-fi
-if [[ "$EUID" -ne 0 ]]; then
-    echo -e "\n\033[0;31mError:\033[0m This script must be run as root!"
-    exit 1
-fi
+arch_check() {
+    if ! grep -q "Arch Linux" /etc/os-release; then
+        echo -e "\n\033[0;31mError:\033[0m This script must be run on Arch Linux!"
+        exit 1
+    fi
+}
+root_check() {
+    if [[ "$EUID" -ne 0 ]]; then
+        echo -e "\n\033[0;31mError:\033[0m This script must be run as root!"
+        exit 1
+    fi
+}
+docker_check() {
+    if grep -q docker /proc/1/cgroup 2>/dev/null || [[ -f /run/.dockerenv ]]; then
+        echo -e "${RED}\nError:${NC} Docker is not supported."
+        exit 1
+    fi
+}
 
+arch_check
+root_check
+docker_check
 
 # Optimize Arch Mirrorlist.
 curl -fsSL https://niton.dev/arch/mirror | bash
