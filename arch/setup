@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+clear
+
+curl -s https://niton.dev/arch/arch.txt
+
+# Optimize Arch Mirrorlist.
+curl -fsSL https://niton.dev/arch/mirror | bash
