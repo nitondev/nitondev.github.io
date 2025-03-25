@@ -6,8 +6,6 @@ convert_to_miB() {
     echo $(( $(echo "$1" | sed 's/[A-Za-z]*//g') * 1024 ))
 }
 
-# Optimize the Arch Mirrors List.
-curl -fsSL https://niton.dev/arch/mirror | bash
 
 BOOT_SIZE="1GiB"
 SWAP_SIZE="4GiB"
