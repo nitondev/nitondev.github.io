@@ -1,19 +1,22 @@
 #!/usr/bin/env bash
 set -e
 
+RED='\033[0;31m'
+NC='\033[0m'  
+
 clear
 
-curl -s https://niton.dev/arch/arch.txt
+curl -s https://niton.dev/arch/arch.
 
 arch_check() {
     if ! grep -q "Arch Linux" /etc/os-release; then
-        echo -e "\n\033[0;31mError:\033[0m This script must be run on Arch Linux!"
+        echo -e "${RED}\nError:${NC} This script must be run on Arch Linux!"
         exit 1
     fi
 }
 root_check() {
     if [[ "$EUID" -ne 0 ]]; then
-        echo -e "\n\033[0;31mError:\033[0m This script must be run as root!"
+        echo -e "${RED}\nError:${NC} This script must be run as root!"
         exit 1
     fi
 }
