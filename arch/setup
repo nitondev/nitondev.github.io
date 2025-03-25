@@ -1,8 +1,20 @@
 #!/usr/bin/env bash
+set -e
 
 clear
 
 curl -s https://niton.dev/arch/arch.txt
+
+# Run checks, before proceed.
+if ! grep -q "Arch Linux" /etc/os-release; then
+    echo -e "\nError: This script must be run on Arch Linux!"
+    exit 1
+fi
+if [[ "$EUID" -ne 0 ]]; then
+    echo -e "\nError: This script must be run as root!"
+    exit 1
+fi
+
 
 # Optimize Arch Mirrorlist.
 curl -fsSL https://niton.dev/arch/mirror | bash
