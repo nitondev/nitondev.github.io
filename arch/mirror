@@ -12,6 +12,7 @@ pacman -Sy --noconfirm archlinux-keyring
 echo -e "\n==> Installing Reflector"
 pacman -Sy --noconfirm --needed reflector rsync
 
+echo -e "\n-------- Mirrorlist Backup --------\n"
 if [[ -f /etc/pacman.d/mirrorlist.backup ]]; then
     echo -e "\n==> Mirror list already backed up."
 else
@@ -19,7 +20,7 @@ else
     echo -e "\n==> Backed up mirror list."
 fi
 
-echo -e "\n==> Fetching the fastest 6 mirrors for country: $ISO"
+echo -e "\n-------- Fetching $ISO Mirrors --------\n"
 if ! reflector --country "$ISO" --age 6 --fastest 6 --sort rate --save /etc/pacman.d/mirrorlist; then
     echo "Error: Failed to fetch mirrors."
     exit 1
