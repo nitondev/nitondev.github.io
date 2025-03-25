@@ -7,11 +7,11 @@ curl -s https://niton.dev/arch/arch.txt
 
 # Run checks, before proceed.
 if ! grep -q "Arch Linux" /etc/os-release; then
-    echo -e "\nError: This script must be run on Arch Linux!"
+    echo -e "\n\033[0;31mError:\033[0m This script must be run on Arch Linux!"
     exit 1
 fi
 if [[ "$EUID" -ne 0 ]]; then
-    echo -e "\nError: This script must be run as root!"
+    echo -e "\n\033[0;31mError:\033[0m This script must be run as root!"
     exit 1
 fi
 
