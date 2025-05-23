@@ -1,0 +1,16 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #101014;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#kod {
+  font-size: 15vw;
+  font-weight: bold;
+  color: #828287;
+  text-align: center;
+}
