@@ -11,6 +11,13 @@
   <div id="code">
     Loading... 
   </div>
-  <script src="script.js"></script> 
+  <script src="script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/fundo/service-worker.js')
+    .then(reg => console.log('Service Worker registered:', reg.scope))
+    .catch(err => console.error('Service Worker registration failed:', err));
+    }
+  </script>
 </body>
 </html>
