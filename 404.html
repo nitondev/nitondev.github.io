@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>404 not found.</title>
+<style>
+body { font-family: monospace; }
+</style>
+</head>
+<body>
+<p><strong>404.</strong> That’s an error.</p>
+<p>The requested URL <strong><span id="path"></span></strong> was not found on this server.<br> That’s all we know.</p>
+<script>document.getElementById('path').textContent = window.location.pathname;</script>
+</body>
+</html>
